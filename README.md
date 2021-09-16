@@ -160,13 +160,23 @@ The script calls the flashing tool `GCFFlasher_internal` which will output any f
 
 To use the script for updating the firmware, follow the below instructions:
 
-##### 1. Check your deCONZ container logs for the update firmware file name:
+##### 1. Check for the update firmware file name
+Find the name of the new version via step 1a or step 1b. 
+
+##### 1a. Check your deCONZ container logs for the update firmware file name:
 Type `docker logs [container name]`, and look for lines near the beginning of the log that look like this, noting the `.GCF` file name listed (you'll need this later):
 ```
 GW update firmware found: /usr/share/deCONZ/firmware/deCONZ_Rpi_0x261e0500.bin.GCF
 GW firmware version: 0x261c0500
 GW firmware version shall be updated to: 0x261e0500
 ```
+
+##### 1b. Check your deCONZ container logs for the update firmware file name:
+Go to:  
+- http://deconz.dresden-elektronik.de/deconz-firmware/         (stable)
+- http://deconz.dresden-elektronik.de/deconz-firmware/beta/    (beta)
+
+and take note of the filename of the version you wish to install. 
 
 ##### 2. Stop your running deCONZ container. You must do this or the firmware update will fail:
 ```bash
@@ -205,7 +215,7 @@ Please note that the values for device and firmware-file are still asked by the 
 
 ##### 4. Follow the prompts:
 - Enter the path (e.g. `/dev/ttyUSB0`) that corresponds to your device in the listing.
-- Type or paste the full file name that corresponds to the file name that you found in the deCONZ container logs in step 1 (or, select a different filename, but you should have a good reason for doing this).
+- Type or paste the full file name that corresponds to the file name that you found in the deCONZ container logs in step 1a (or, select a different filename, but you should have a good reason for doing this).
 If there are newer firmware files ([found here](https://deconz.dresden-elektronik.de/deconz-firmware/)) than the ones contained in your docker you could specify the name and the script will try to initiate a download. Just follow the prompts.
 - If the device/path, file name and listed options look OK, type Y to start flashing!
 
